@@ -2,6 +2,8 @@ from flask import Flask, request, redirect
 import subprocess
 import os
 
+# spotify:track:2Iq6HhIquO7JKr0KfTNLzU
+
 app = Flask(__name__)
 
 def run(*popenargs, input=None, check=False, **kwargs):
@@ -27,8 +29,8 @@ def run(*popenargs, input=None, check=False, **kwargs):
 def play():
     spotify_uri = request.args.get('uri')
     # Play the music
-    print(run(["python3", "/home/pi/Documents/QRCodeMusic/spotify_example.py", "--user", "Rafael09ED", "--password", os.environ['SPOTIFY_PASS']]))
-    return redirect('google.com', code=302)
+    print(run(["python3", "/home/pi/Documents/QRCodeMusic/spotify_example.py", "--user", "Rafael09ED", "--password", os.environ['SPOTIFY_PASS']], "--uri", spotify_uri))
+    return redirect('http://google.com', code=302)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
