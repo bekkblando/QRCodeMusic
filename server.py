@@ -25,12 +25,13 @@ def run(*popenargs, input=None, check=False, **kwargs):
             retcode, process.args, output=stdout, stderr=stderr)
     return retcode, stdout, stderr
 
-@app.route('/play')
-def play():
+@app.route('/music')
+def music():
     spotify_uri = request.args.get('uri')
     # Play the music
     print(run(["python3", "/home/pi/Documents/QRCodeMusic/spotify_example.py", "--user", "Rafael09ED", "--password", os.environ['SPOTIFY_PASS'], "--uri", spotify_uri]))
-    return redirect('http://google.com', code=302)
+    media_type, id = spotify_uri.split(":")
+    return redirect(f'https://open.spotify.com/${media_type}/${id}', code=302)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
