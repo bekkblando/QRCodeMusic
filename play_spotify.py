@@ -16,8 +16,6 @@ from pychromecast.controllers.spotify import SpotifyController
 import spotify_token as st
 import spotipy
 
-CAST_NAME = "Sadie's TV"
-
 
 class ConnListener:
     def __init__(self, mz):
@@ -41,7 +39,7 @@ class MzListener:
     def multizone_status_received(self):
         self.got_members=True
 
-def play_spotify(user, password, uri = ["spotify:track:3Zwu2K0Qa5sT6teCCHPShP"], show_debug = False, cast = CAST_NAME):
+def play_spotify(user, password, uri = ["spotify:track:3Zwu2K0Qa5sT6teCCHPShP"], show_debug = False, cast =  "Sadie's TV"):
     if show_debug:
         logging.basicConfig(level=logging.DEBUG)
         # Uncomment to enable http.client debug log
