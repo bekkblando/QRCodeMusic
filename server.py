@@ -29,7 +29,7 @@ def run(*popenargs, input=None, check=False, **kwargs):
 def music():
     spotify_uri = request.args.get('uri')
     # Play the music
-    print(run(["python3", "/home/pi/Documents/QRCodeMusic/spotify_example.py", "--user", "Rafael09ED", "--password", os.environ['SPOTIFY_PASS'], "--uri", spotify_uri]))
+    print(run(["nohup", "python3", "/home/pi/Documents/QRCodeMusic/spotify_example.py", "--user", "Rafael09ED", "--password", os.environ['SPOTIFY_PASS'], "--uri", spotify_uri, "&"]))
     spotify, media_type, id = spotify_uri.split(":")
     return redirect("https://open.spotify.com/{media_type}/{id}".format(media_type=media_type, id = id), code=302)
 
