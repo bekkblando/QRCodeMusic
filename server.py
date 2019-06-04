@@ -31,7 +31,7 @@ def music():
     # Play the music
     print(run(["python3", "/home/pi/Documents/QRCodeMusic/spotify_example.py", "--user", "Rafael09ED", "--password", os.environ['SPOTIFY_PASS'], "--uri", spotify_uri]))
     media_type, id = spotify_uri.split(":")
-    return redirect(f"https://open.spotify.com/{media_type}/{id}", code=302)
+    return redirect("https://open.spotify.com/{media_type}/{id}".format(media_type=media_type, id = id), code=302)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
