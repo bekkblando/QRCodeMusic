@@ -29,7 +29,7 @@ def run(*popenargs, input=None, check=False, **kwargs):
 def play():
     spotify_uri = request.args.get('uri')
     # Play the music
-    print(run(["python3", "/home/pi/Documents/QRCodeMusic/spotify_example.py", "--user", "Rafael09ED", "--password", os.environ['SPOTIFY_PASS']], "--uri", spotify_uri))
+    print(run(["python3", "/home/pi/Documents/QRCodeMusic/spotify_example.py", "--user", "Rafael09ED", "--password", os.environ['SPOTIFY_PASS'], "--uri", spotify_uri]))
     return redirect('http://google.com', code=302)
 
 if __name__ == '__main__':
