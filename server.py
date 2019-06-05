@@ -20,7 +20,7 @@ def spotify():
 def youtube():
     video_id = request.args.get('id')
     # Play the video
-    play_spotify("Sadie's TV", video_id )
+    play_youtube("Sadie's TV", video_id )
     return redirect("https://youtube.com/watch?v={video_id}".format(video_id = video_id), code=302)
 
 
