@@ -1,0 +1,9 @@
+server {
+    listen 80;
+    server_name newvinal;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/pi/QRCodeMusic/QRCodeMusic.sock;
+    }
+}
