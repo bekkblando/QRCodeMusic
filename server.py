@@ -6,9 +6,9 @@ from play_youtube import play_youtube
 
 # spotify:track:2Iq6HhIquO7JKr0KfTNLzU
 
-app = Flask(__name__)
+application = Flask(__name__)
 
-@app.route('/spotify')
+@application.route('/spotify')
 def spotify():
     spotify_uri = request.args.get('uri')
     # Play the music
@@ -16,7 +16,7 @@ def spotify():
     spotify, media_type, id = spotify_uri.split(":")
     return redirect("https://open.spotify.com/{media_type}/{id}".format(media_type=media_type, id = id), code=302)
 
-@app.route('/youtube')
+@application.route('/youtube')
 def youtube():
     video_id = request.args.get('id')
     # Play the video
@@ -25,4 +25,4 @@ def youtube():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    application.run(debug=True, host='0.0.0.0', threaded=True)
