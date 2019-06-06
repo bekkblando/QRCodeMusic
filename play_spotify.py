@@ -58,7 +58,6 @@ def play_spotify(user, password, uri = ["spotify:track:3Zwu2K0Qa5sT6teCCHPShP"],
         print('Discovered casts: {}'.format(chromecasts))
         sys.exit(1)
 
-    print('cast {}'.format(cast))
 
     # Wait for connection to the chromecast
     cast.wait()
