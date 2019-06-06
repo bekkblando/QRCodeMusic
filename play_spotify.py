@@ -41,23 +41,48 @@ class MzListener:
     def multizone_status_received(self):
         self.got_members=True
 
+# Helper Functions
+
+
+def discover_casts(cast):
+    chromecasts = pychromecast.get_chromecasts()
+    for _cast in chromecasts:
+        if _cast.name == cast:
+            cast = _cast
+            return cast
+
+
+# The cast in this case will be the same as the cast passed into play_spotify
+def get_cast(cast_ip, cast):
+    _cast = pychromecast.Chromecast(cast_ip)
+    if(_cast and _cast.name == cast):
+        return _cast
+    else:
+        return discover_casts(cast)
+
+
+# Main Function
 def play_spotify(user, password, uri = ["spotify:track:3Zwu2K0Qa5sT6teCCHPShP"], show_debug = False, cast = "Sadie's TV"):
     if show_debug:
         logging.basicConfig(level=logging.DEBUG)
         # Uncomment to enable http.client debug log
         #http_client.HTTPConnection.debuglevel = 1
 
-    chromecasts = pychromecast.get_chromecasts()
-    for _cast in chromecasts:
-        if _cast.name == cast:
-            cast = _cast
-            break
+    # Store the ip in a txt file
+    # Open File
+    cast_ip = None
 
-    if not cast:
-        print('No chromecast with name "{}" discovered'.format(cast))
-        print('Discovered casts: {}'.format(chromecasts))
-        sys.exit(1)
-
+    with open('cast.txt', 'r+') as f:
+        print("This is the file pointer", f)
+        if len(f.read(1)) == 0:
+            cast = discover_casts(cast)
+        else:
+            f.seek(0)
+            cast_ip = [line for line in f][0]
+            cast = get_cast(cast_ip, cast)
+        
+        if(cast.host != cast_ip):
+            f.write(cast.host)
 
     # Wait for connection to the chromecast
     cast.wait()
